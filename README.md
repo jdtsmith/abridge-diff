@@ -18,4 +18,4 @@ Magit tips: works best with limited surrounding-line context (`-U0`, just hit `-
 
 ## How this works:
 
-Adds post-processing to `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  Protects all refined differences and a configurable amount of context around them.  
+Adds post-processing to `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  Protects all refined differences and a configurable amount of context around them, and computes regions to hide, which are hidden using `'invisibility` text properties.  Note that the text is still there, so toggling hiding simply reveals the invisible text.
