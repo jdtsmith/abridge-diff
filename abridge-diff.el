@@ -1,14 +1,22 @@
-(defvar abridge-diff-word-buffer 3
-  "Number of words to preserve around refined regions.")
+(defcustom abridge-diff-word-buffer 3
+  "Number of words to preserve around refined regions."
+  :group 'abridge-diff
+  :type 'integer)
 
-(defvar abridge-diff-invisible-min 5
-  "Minimum region length (in characters) between refine areas that can be made invisible.")
+(defcustom abridge-diff-invisible-min 5
+  "Minimum region length (in characters) between refine areas that can be made invisible."
+  :group 'abridge-diff
+  :type 'integer)
 
-(defvar abridge-diff-no-change-line-words 12
-  "Number of words to keep at the beginning of a line without any refined diffs.")
+(defcustom abridge-diff-no-change-line-words 12
+  "Number of words to keep at the beginning of a line without any refined diffs."
+  :group 'abridge-diff
+  :type 'integer)
 
-(defvar abridge-diff-first-words-preserve 4
-  "Keep at least this many words visible at the beginning of an abridged line with refined diffs.")
+(defcustom abridge-diff-first-words-preserve 4
+  "Keep at least this many words visible at the beginning of an abridged line with refined diffs."
+  :group 'abridge-diff
+  :type 'integer)
 
 (defun abridge-diff-merge-exclude (excludes)
   (let ((p excludes))
