@@ -1,5 +1,5 @@
 (defvar evenless-context-word-buffer 6
-  "Minimum region length between highlighted areas that can be made invisible.")
+  "Number of words to preserver before and after highlighted areas.")
 
 (defvar evenless-context-invisible-min 5
   "Minimum region length between highlighted areas that can be made invisible.")
