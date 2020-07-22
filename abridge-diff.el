@@ -117,6 +117,7 @@ skipping the ranges listed in EXCLUDES"
 (when (fboundp 'magit)
   (require 'magit-diff)
   (add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
+  (add-hook 'magit-status-mode-hook #'abridge-diff-enable-hiding)
   (transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
     '("a" "abridge refined diffs" abridge-diff-toggle-hiding)))
 
