@@ -85,12 +85,25 @@ skipping the ranges listed in EXCLUDES"
 (defun evenless-context-enable-hiding ()
   (interactive)
   (add-to-invisibility-spec '(evenless-context-invisible . t)))
+(add-hook 'magit-diff-mode-hook #'evenless-context-enable-hiding)
 
 (defun evenless-context-disable-hiding ()
   (interactive)
   (setq buffer-invisibility-spec nil))
 
-(add-hook 'magit-diff-mode-hook #'evenless-context-enable-hiding)
+(defun evenless-context-toggle-hiding ()
+  (interactive)
+  (if buffer-invisibility-spec
+      (evenless-context-disable-hiding)
+    (evenless-context-enable-hiding)))
+
+
+;; (transient-define-argument 'evenless-context-toggle
+;;   :key "e" :argument "even less context"
+(require 'magit-diff)
+(transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
+  '("e" "even less context" evenless-context-toggle-hiding))
+
 ;(advice-remove #'smerge-refine-regions #'evenless-context-mark)
 
 
