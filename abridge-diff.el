@@ -94,7 +94,6 @@ skipping the ranges listed in EXCLUDES"
 (defun abridge-diff-enable-hiding ()
   (interactive)
   (add-to-invisibility-spec '(abridge-diff-invisible . t)))
-(add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
 
 (defun abridge-diff-disable-hiding ()
   (interactive)
@@ -106,10 +105,12 @@ skipping the ranges listed in EXCLUDES"
       (abridge-diff-disable-hiding)
     (abridge-diff-enable-hiding)))
 
-(require 'magit-diff)
-(transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
-  '("a" "abridge refined diffs" abridge-diff-toggle-hiding))
+;; Add hooks into magit if it's loaded
+(when (fboundp 'magit)
+  (require 'magit-diff)
+  (add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
+  (transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
+    '("a" "abridge refined diffs" abridge-diff-toggle-hiding)))
 
-;(advice-remove #'smerge-refine-regions #'abridge-diff-mark)
 
 
