@@ -81,7 +81,7 @@ skipping the ranges listed in EXCLUDES"
 	  (add-text-properties (car range) (cadr range)
 			       '(invisible abridge-diff-invisible))))))
 
-(defun abridge-diff-mark (&rest rest)
+(defun abridge-diff-abridge (&rest rest)
   (dolist (x (seq-partition (seq-take rest 4) 2))
     (save-excursion
       (goto-char (car x))
@@ -89,7 +89,7 @@ skipping the ranges listed in EXCLUDES"
 	(abridge-diff-make-invisible (point) (line-end-position))
 	(forward-line)))))
 
-(advice-add #'smerge-refine-regions :after #'abridge-diff-mark)
+(advice-add #'smerge-refine-regions :after #'abridge-diff-abridge)
 
 (defun abridge-diff-enable-hiding ()
   (interactive)
