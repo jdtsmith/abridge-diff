@@ -1,8 +1,8 @@
-(defvar abridge-diff-word-buffer 6
+(defvar abridge-diff-word-buffer 3
   "Number of words to preserve around refined regions.")
 
 (defvar abridge-diff-invisible-min 5
-  "Minimum region length between refine areas that can be made invisible.")
+  "Minimum region length (in characters) between refine areas that can be made invisible.")
 
 (defvar abridge-diff-no-change-line-words 12
   "Number of words to keep at the beginning of a line without any refined diffs.")
