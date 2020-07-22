@@ -90,7 +90,7 @@ skipping the ranges listed in EXCLUDES"
   (interactive)
   (setq buffer-invisibility-spec nil))
 
-(add-hook #'magit-diff-mode-hook #'evenless-context-enable-hiding)
+(add-hook 'magit-diff-mode-hook #'evenless-context-enable-hiding)
 ;(advice-remove #'smerge-refine-regions #'evenless-context-mark)
 
 
