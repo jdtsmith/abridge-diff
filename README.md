@@ -14,7 +14,7 @@ Using `abridge-diff`, only the refined changes and a bit of surrounding context 
 
 Once installed, `abridge-diff` will start abridging all _refined_ diff hunks. You can enable and disable showing the abridged version using `abridge-diff-toggle-hiding`.  Automatically configures itself to work with [magit](https://github.com/magit/magit), adding a new `D a` diff setup command, which toggles the abridging. 
 
-## Magit tips
+## Magit tips:
 
 You need to enable hunk refining for this to do anything in magit.  This works best with `magit-diff-refine-hunk` set to `'all` (so that all hunks in a given diff have their refined differences computed in one pass).  If you are working with long lines, this has the most impact with limited or no surrounding-line context (`-U0`, just hit `-` repeatedly).  Applying abridged diff hunks should work as normal.
 
