@@ -3,11 +3,11 @@ A simple Emacs package for _abridging_ refined diff hunks (for example in [magit
 
 Simplest to illustrate with a pair of pictures:
 ### Before
-Long "sentences" with few changes are full of useless context:
+For long, multi-sentence paragraphs on a single line, showing a few changes produces lots of useless context:
 ![](examples/before.png)
 
 ### After
-Only changes and a bit of surrounding context are shown.  Much cleaner:
+Using `abridge-diff`, only the refined changes and a bit of surrounding context are shown.  Much cleaner:
 ![](examples/after.png)
 
 ## Usage:
