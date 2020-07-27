@@ -99,17 +99,20 @@ skipping the ranges listed in EXCLUDES"
 
 (advice-add #'smerge-refine-regions :after #'abridge-diff-abridge)
 
+(defvar abridge-diff-hiding nil)
 (defun abridge-diff-enable-hiding ()
   (interactive)
+  (setq abridge-diff-hiding t)
   (add-to-invisibility-spec '(abridge-diff-invisible . t)))
 
 (defun abridge-diff-disable-hiding ()
   (interactive)
-  (setq buffer-invisibility-spec nil))
+  (setq abridge-diff-hiding nil)
+  (remove-from-invisibility-spec '(abridge-diff-invisible . t)))
 
 (defun abridge-diff-toggle-hiding ()
   (interactive)
-  (if buffer-invisibility-spec
+  (if abridge-diff-hiding
       (abridge-diff-disable-hiding)
     (abridge-diff-enable-hiding)))
 
