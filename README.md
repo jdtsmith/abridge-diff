@@ -1,7 +1,6 @@
 # abridge-diff
-A simple Emacs package for _abridging_ refined diff hunks (for example in [magit](https://github.com/magit/magit)).  Useful for line-based diffs of files with very long lines, as in LaTeX files or text files with full paragraphs per line (often using `visual-line-mode`).
+A simple Emacs package for _abridging_ refined diff hunks (for example in [magit](https://github.com/magit/magit)).  Why abridge a diff hunk?  Most diffs are line based.  If you are working with files with very long lines, as in LaTeX files or text files with full paragraphs per line (often using `visual-line-mode`), line-based diffs can be challenging to read, even with hunk refining on (highlighting the words which changed). In pictures:
 
-Simplest to illustrate with a pair of pictures:
 ### Before
 For long, multi-sentence paragraphs on a single line, showing a few changes produces lots of useless context:
 ![](examples/before.png)
@@ -12,7 +11,7 @@ Using `abridge-diff`, only the refined changes and a bit of surrounding context 
 
 ## Usage:
 
-Once installed, `abridge-diff` will start abridging all _refined_ diff hunks. You can enable and disable showing the abridged version using `abridge-diff-toggle-hiding`.  Automatically configures itself to work with [magit](https://github.com/magit/magit), adding a new `D a` diff setup command, which toggles the abridging. 
+Once installed, `abridge-diff` will immediately start abridging all _refined_ diff hunks. You can enable and disable _showing_ the abridged version using `abridge-diff-toggle-hiding`.  Automatically configures itself to work with [magit](https://github.com/magit/magit), adding a new `D a` diff setup command, which toggles the abridging.  Hunks are shown as abridged by default.
 
 ## Magit tips:
 
@@ -20,7 +19,7 @@ You need to enable hunk refining for this to do anything in magit.  This works b
 
 ## How this works:
 
-This works by adding a post-processing step after `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  This protects all refined differences and a configurable amount of context around them, and computes regions to hide using `'invisibility` text properties.  Note that the abridged text is still there, so toggling hiding simply reveals it.
+This works by adding a post-processing step after `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  This protects all refined differences and a configurable amount of context around them, and computes regions to hide using the `'invisibility` text property.  Note that the abridged text is still there, so toggling hiding simply reveals it.
 
 ## Settings:
 
