@@ -1,3 +1,44 @@
+;;; abridge-diff.el --- Abridge long line-based diffs -*- lexical-binding:t -*-
+
+;; Copyright (C) 2020 J.D. Smith <jdtsmith AT gmail>
+
+;; Author: J.D. Smith <jdtsmith AT gmail>
+;; URL: https://github.com/jdtsmith/abridge-diff
+;; Version: 0.0.1
+;; Keywords: magit diffs 
+;; Package-Requires: 
+;; Prefix: abridge-diff
+;; Separator: -
+
+;;; Commentary:
+;;
+;; abridge-diff can be installed from Melpa with M-x `package-install' RET
+;; abridge-diff.
+
+;; To use, call M-x abridge-diff-toggle-hiding on any "refined" (word
+;; change highlighted) diff hunk.  Typically this would be in a magit
+;; log or status buffer, for which the special command `D a' will be
+;; automatically added. Note that this works best with
+;; 'magit-diff-refine-hunk set to 'all, so that all hunks are refined
+;; at once.
+;;
+;;; License:
+;;
+;; This file is NOT part of GNU Emacs.
+;;
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 (defcustom abridge-diff-word-buffer 3
   "Number of words to preserve around refined regions."
   :group 'abridge-diff
