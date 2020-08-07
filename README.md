@@ -19,7 +19,7 @@ You need to enable hunk refining for this to do anything in magit.  This works b
 
 ## How this works:
 
-This works by adding a post-processing step after `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  This protects all refined differences and a configurable amount of context around them, and computes regions to hide using the `'invisibility` text property.  Note that the abridged text is still there, so toggling hiding simply reveals it.
+This works by adding a post-processing step after `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  This protects all refined differences and a configurable amount of context around them, and computes regions to hide using the `'invisibility` text property.  Note that the abridged text is still _there_, but indicated by an ellipsis (…), so toggling hiding simply reveals it.
 
 ## Settings:
 
