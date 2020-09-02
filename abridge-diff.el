@@ -144,7 +144,7 @@ Skip the ranges listed in EXCLUDES"
 	(dolist (range hide)
 	  (add-text-properties (car range) (cadr range)
 			       '(invisible abridge-diff-invisible))))))
-
+;;;###autoload
 (defun abridge-diff-abridge (&rest rest)
   "Do the diff abridge."
   (dolist (x (seq-partition (seq-take rest 4) 2))
@@ -154,6 +154,7 @@ Skip the ranges listed in EXCLUDES"
 	(abridge-diff-make-invisible (point) (line-end-position))
 	(forward-line)))))
 
+;;;###autoload
 (advice-add #'smerge-refine-regions :after #'abridge-diff-abridge)
 
 (defvar abridge-diff-hiding nil)
