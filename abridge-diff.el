@@ -157,6 +157,7 @@ Skip the ranges listed in EXCLUDES"
 (advice-add #'smerge-refine-regions :after #'abridge-diff-abridge)
 
 (defvar abridge-diff-hiding nil)
+;;;###autoload
 (defun abridge-diff-enable-hiding ()
   "Enable abridged text hiding."
   (interactive)
