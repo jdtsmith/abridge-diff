@@ -21,9 +21,9 @@
 ;; refined (word change highlighted) diff hunks, shortening them by
 ;; replacing unnecessary surround context with ellipses (...) . You
 ;; can enable and disable showing the abridged version using
-;; abridge-diff-toggle-hiding. Automatically configures itself to work
+;; abridge-diff-toggle-hiding.  Automatically configures itself to work
 ;; with magit, adding a new `D a' diff setup command, which toggles the
-;; abridging. Hunks are shown as abridged by default.
+;; abridging.  Hunks are shown as abridged by default.
 ;;
 ;; Settings:
 ;;
@@ -50,6 +50,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+;;; Code:
+
 (defcustom abridge-diff-word-buffer 3
   "Number of words to preserve around refined regions."
   :group 'abridge-diff
@@ -71,6 +73,7 @@
   :type 'integer)
 
 (defun abridge-diff-merge-exclude (excludes)
+  "Merge exclude regions EXCLUDES, a list of lists."
   (let ((p excludes))
     (while (cdr p)
       (let ((left (car p))
@@ -81,8 +84,8 @@
 	  (setcdr p (cddr p)))))))
 
 (defun abridge-diff-compute-hidden (beg end excludes)
-  "Compute a list of ranges (from to) between position beg and end, 
-skipping the ranges listed in EXCLUDES"
+  "Compute a list of ranges (from to) between position BEG and END.
+Skip the ranges listed in EXCLUDES"
   (let ((hide (list (list beg (caar excludes))))
 	(p excludes))
     (while (cdr p)
@@ -97,6 +100,7 @@ skipping the ranges listed in EXCLUDES"
 		(nreverse hide))))
 
 (defun abridge-diff-make-invisible (beg end)
+  "Set invisibility for context surrounding refined diffs in region from BEG to END."
   (if (> (- end beg) abridge-diff-invisible-min)
       (let ((protect
 	     (mapcar (lambda (ov)
@@ -111,7 +115,7 @@ skipping the ranges listed in EXCLUDES"
 			   (forward-word abridge-diff-word-buffer)
 			   (setq pend (min end (point))))
 			 (list pbeg pend)))
-		     (sort 
+		     (sort
 		      (seq-filter (lambda (ov)
 				    (eq (overlay-get ov 'diff-mode) 'fine))
 				  (overlays-in beg end))
@@ -142,6 +146,7 @@ skipping the ranges listed in EXCLUDES"
 			       '(invisible abridge-diff-invisible))))))
 
 (defun abridge-diff-abridge (&rest rest)
+  "Do the diff abridge."
   (dolist (x (seq-partition (seq-take rest 4) 2))
     (save-excursion
       (goto-char (car x))
@@ -153,16 +158,19 @@ skipping the ranges listed in EXCLUDES"
 
 (defvar abridge-diff-hiding nil)
 (defun abridge-diff-enable-hiding ()
+  "Enable abridged text hiding."
   (interactive)
   (setq abridge-diff-hiding t)
   (add-to-invisibility-spec '(abridge-diff-invisible . t)))
 
 (defun abridge-diff-disable-hiding ()
+  "Disable abridged text hiding."
   (interactive)
   (setq abridge-diff-hiding nil)
   (remove-from-invisibility-spec '(abridge-diff-invisible . t)))
 
 (defun abridge-diff-toggle-hiding ()
+  "Toggle abridged text hiding."
   (interactive)
   (if abridge-diff-hiding
       (abridge-diff-disable-hiding)
