@@ -177,6 +177,7 @@ Skip the ranges listed in EXCLUDES"
     (abridge-diff-enable-hiding)))
 
 ;; Add hooks into magit if it's loaded
+;;;###autoload
 (when (fboundp 'magit)
   (require 'magit-diff)
   (add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
