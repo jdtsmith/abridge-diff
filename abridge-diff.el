@@ -1,12 +1,12 @@
-;;; abridge-diff.el --- Abridge long line-based diffs -*- lexical-binding:t -*-
+;;; abridge-diff.el --- Abridge long line-based diff hunks, including in magit -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2020 J.D. Smith <jdtsmith AT gmail>
 
 ;; Author: J.D. Smith <jdtsmith AT gmail>
+;; Package-Requires: ((emacs "26.1"))
 ;; URL: https://github.com/jdtsmith/abridge-diff
 ;; Version: 0.0.1
-;; Keywords: magit diffs 
-;; Package-Requires: 
+;; Keywords: magit, diffs, tools
 ;; Prefix: abridge-diff
 ;; Separator: -
 
@@ -14,13 +14,24 @@
 ;;
 ;; abridge-diff can be installed from Melpa with M-x `package-install' RET
 ;; abridge-diff.
-
-;; To use, call M-x abridge-diff-toggle-hiding on any "refined" (word
-;; change highlighted) diff hunk.  Typically this would be in a magit
-;; log or status buffer, for which the special command `D a' will be
-;; automatically added. Note that this works best with
-;; 'magit-diff-refine-hunk set to 'all, so that all hunks are refined
-;; at once.
+;;
+;; Usage:
+;;
+;; Once installed, abridge-diff will immediately start abridging all
+;; refined (word change highlighted) diff hunks, shortening them by
+;; replacing unnecessary surround context with ellipses (...) . You
+;; can enable and disable showing the abridged version using
+;; abridge-diff-toggle-hiding. Automatically configures itself to work
+;; with magit, adding a new `D a' diff setup command, which toggles the
+;; abridging. Hunks are shown as abridged by default.
+;;
+;; Settings:
+;;
+;; You can customize settings with these variables; just M-x customize-group abridge-diff:
+;;  abridge-diff-word-buffer: Number of words to preserve around refined regions.
+;;  abridge-diff-first-words-preserve: Keep at least this many words visible at the beginning of an abridged line with refined diffs.
+;;  abridge-diff-invisible-min: Minimum region length (in characters) between refined areas that can be made invisible.
+;;  abridge-diff-no-change-line-words: Number of words to keep at the beginning of a line without any refined diffs.
 ;;
 ;;; License:
 ;;
@@ -165,5 +176,5 @@ skipping the ranges listed in EXCLUDES"
   (transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
     '("a" "abridge refined diffs" abridge-diff-toggle-hiding)))
 
-
-
+(provide 'abridge-diff)
+;;; abridge-diff.el ends here
