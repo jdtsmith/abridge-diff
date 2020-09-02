@@ -5,7 +5,7 @@
 ;; Author: J.D. Smith <jdtsmith AT gmail>
 ;; Package-Requires: ((emacs "26.1"))
 ;; URL: https://github.com/jdtsmith/abridge-diff
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; Keywords: magit, diffs, tools
 ;; Prefix: abridge-diff
 ;; Separator: -
