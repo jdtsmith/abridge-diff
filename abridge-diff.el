@@ -164,12 +164,14 @@ Skip the ranges listed in EXCLUDES"
   (setq abridge-diff-hiding t)
   (add-to-invisibility-spec '(abridge-diff-invisible . t)))
 
+;;;###autoload
 (defun abridge-diff-disable-hiding ()
   "Disable abridged text hiding."
   (interactive)
   (setq abridge-diff-hiding nil)
   (remove-from-invisibility-spec '(abridge-diff-invisible . t)))
 
+;;;###autoload
 (defun abridge-diff-toggle-hiding ()
   "Toggle abridged text hiding."
   (interactive)
