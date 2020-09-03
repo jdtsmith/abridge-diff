@@ -15,7 +15,8 @@ Once installed, `abridge-diff` will immediately start abridging all _refined_ di
 
 ## Magit tips:
 
-You need to enable hunk refining for this to do anything in magit.  This works best with `magit-diff-refine-hunk` set to `'all` (so that all hunks in a given diff have their refined differences computed in one pass).  If you are working with long lines, this has the most impact with limited or no surrounding-line context (`-U0`, just hit `-` repeatedly).  Applying abridged diff hunks should work as normal.
+You need to enable hunk refining for this to do anything in magit.  This works best with `magit-diff-refine-hunk` set to `'all` (so that all hunks in a given diff have their refined differences computed in one pass).  If you are working with long lines, `abridge-diff` has the most impact with limited or no surrounding-line context (`-U0`, just hit `-` repeatedly).  Applying abridged diff hunks should work as normal.  To toggle abridged text visibility, simply invoke magit's `Diff (change)` command (default `D`), and use command `a`: 
+![](examples/magit.png)
 
 ## How this works:
 
