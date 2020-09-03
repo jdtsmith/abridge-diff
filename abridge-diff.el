@@ -52,6 +52,8 @@
 
 ;;; Code:
 
+(require 'seq)
+
 (defcustom abridge-diff-word-buffer 3
   "Number of words to preserve around refined regions."
   :group 'abridge-diff
