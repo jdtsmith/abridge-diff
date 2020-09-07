@@ -1,5 +1,7 @@
 # abridge-diff
-A simple Emacs package for _abridging_ refined diff hunks (for example in [magit](https://github.com/magit/magit)).  Why abridge a diff hunk?  Most diffs are line based.  If you are working on files with very long lines, for example LaTeX files, or text files with full paragraphs per line (often using `visual-line-mode`), line-based diffs can be very challenging to read, even with "hunk refining" enabled (highlighting the words which changed). In pictures:
+A simple Emacs package for _abridging_ refined diff hunks (for example in [magit](https://github.com/magit/magit)).  Why abridge a diff hunk?  Most diffs are line based.  If you are working on files with very long lines, for example LaTeX files, or text files with full paragraphs per line (often using `visual-line-mode`), line-based diffs can be very challenging to read, even with "hunk refining" enabled (highlighting the words which changed). 
+
+In pictures:
 
 ### Before
 For long, multi-sentence paragraphs on a single line, showing a few changes produces lots of useless context:
