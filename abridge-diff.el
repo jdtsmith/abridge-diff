@@ -148,7 +148,7 @@ Skip the ranges listed in EXCLUDES"
 			       '(invisible abridge-diff-invisible))))))
 ;;;###autoload
 (defun abridge-diff-abridge (&rest rest)
-  "Do the diff abridge."
+  "Do the diff abridge, taking as REST the region argument of `smerge-refine-regions'."
   (dolist (x (seq-partition (seq-take rest 4) 2))
     (save-excursion
       (goto-char (car x))
