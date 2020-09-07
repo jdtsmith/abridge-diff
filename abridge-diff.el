@@ -186,6 +186,7 @@ Skip the ranges listed in EXCLUDES"
 ;;;###autoload
 (when (fboundp 'magit)
   (require 'magit-diff)
+  (require 'transient)
   (add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
   (add-hook 'magit-status-mode-hook #'abridge-diff-enable-hiding)
   (transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
