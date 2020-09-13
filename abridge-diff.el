@@ -174,6 +174,7 @@ Skip the ranges listed in EXCLUDES"
   (remove-from-invisibility-spec '(abridge-diff-invisible . t)))
 
 ;;;###autoload
+(defvar magit-diff-refine-hunk)
 (defun abridge-diff-toggle-hiding ()
   "Toggle abridged text hiding."
   (interactive)
@@ -186,10 +187,8 @@ Skip the ranges listed in EXCLUDES"
 	(setq msg (concat msg " [WARNING: Hunk Refining Disabled!]"))))
     (message msg)))
 
-;; Pacify compiler
 (declare-function transient-append-suffix "transient.el" t t)
 (declare-function transient-remove-suffix "transient.el" t t)
-(defvar magit-diff-refine-hunk)
 ;;;###autoload
 (defun abridge-diff-enable ()
   "Enable abridge-diff, and the related advice."
@@ -218,7 +217,6 @@ Skip the ranges listed in EXCLUDES"
   (if abridge-diff-mode
       (abridge-diff-enable)
     (abridge-diff-disable)))
-
 
 (provide 'abridge-diff)
 ;;; abridge-diff.el ends here
