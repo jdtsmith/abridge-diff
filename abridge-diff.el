@@ -157,9 +157,8 @@ Skip the ranges listed in EXCLUDES"
 	(forward-line)))))
 
 ;;;###autoload
-(advice-add #'smerge-refine-regions :after #'abridge-diff-abridge)
 
-(defvar abridge-diff-hiding nil)
+(defvar-local abridge-diff-hiding nil)
 ;;;###autoload
 (defun abridge-diff-enable-hiding ()
   "Enable abridged text hiding."
@@ -180,17 +179,43 @@ Skip the ranges listed in EXCLUDES"
   (interactive)
   (if abridge-diff-hiding
       (abridge-diff-disable-hiding)
-    (abridge-diff-enable-hiding)))
+    (abridge-diff-enable-hiding))
+  (let ((msg (concat "Diff Abriding " (if abridge-diff-hiding "On" "Off"))))
+    (when (fboundp 'magit)		;add magit command
+      (unless magit-diff-refine-hunk
+	(setq msg (concat msg " [WARNING: Hunk Refining Disabled!]"))))
+    (message msg)))
 
-;; Add hooks into magit if it's loaded
+(declare-function transient-append-suffix "transient.el" t t)
 ;;;###autoload
-(when (fboundp 'magit)
-  (require 'magit-diff)
-  (require 'transient)
-  (add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
-  (add-hook 'magit-status-mode-hook #'abridge-diff-enable-hiding)
-  (transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
-    '("a" "abridge refined diffs" abridge-diff-toggle-hiding)))
+(defun abridge-diff-enable ()
+  "Enable abridge-diff, and the related advice."
+  (advice-add #'smerge-refine-regions :after #'abridge-diff-abridge)
+  (when (fboundp 'magit)		;add magit command
+    (require 'magit-diff)
+    (add-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
+    (add-hook 'magit-status-mode-hook #'abridge-diff-enable-hiding)
+    (transient-append-suffix 'magit-diff-refresh 'magit-diff-toggle-refine-hunk
+      '("a" "abridge refined diffs" abridge-diff-toggle-hiding))))
+
+;;;###autoload
+(defun abridge-diff-disable ()
+  "Enable abridge-diff, and the related advice."
+  (advice-remove #'smerge-refine-regions #'abridge-diff-abridge)
+  (when (fboundp 'magit)		;add magit command
+    (require 'magit-diff)
+    (remove-hook 'magit-diff-mode-hook #'abridge-diff-enable-hiding)
+    (remove-hook 'magit-status-mode-hook #'abridge-diff-enable-hiding)
+    (transient-remove-suffix 'magit-diff-refresh 'abridge-diff-toggle-hiding)))
+  
+;;;###autoload
+(define-minor-mode abridge-diff-mode
+  "Toggle abridged diff mode."
+  :lighter " abridge-diff" :global t
+  (if abridge-diff-mode
+      (abridge-diff-enable)
+    (abridge-diff-disable)))
+
 
 (provide 'abridge-diff)
 ;;; abridge-diff.el ends here
