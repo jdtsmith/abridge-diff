@@ -35,10 +35,6 @@ Once installed and enabled, `abridge-diff` will immediately start abridging all 
 
 This works best with `magit-diff-refine-hunk` set to `'all` (so that all hunks in a given diff have their refined differences computed in one pass).  If you are working with long lines, `abridge-diff` has the most impact with limited or no surrounding-line context (`-U0`, just hit `-` repeatedly).  Applying abridged diff hunks should work as normal.  
 
-## How this works:
-
-This works by adding a post-processing step after `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  This protects all refined differences and a configurable amount of context around them, and computes regions to hide, marking them with a special `'invisibility` text property.  Note that the abridged text is still _there_, but indicated by an ellipsis (…), so toggling hiding simply reveals it.
-
 ## Settings:
 
 You can customize settings with these variables; just `M-x customize-group abridge-diff`:
@@ -47,3 +43,7 @@ You can customize settings with these variables; just `M-x customize-group abrid
 - **abridge-diff-first-words-preserve**:    Keep at least this many words visible at the beginning of an abridged line with refined diffs.
 - **abridge-diff-invisible-min**: Minimum region length (in characters) between refined areas that can be made invisible.
 - **abridge-diff-no-change-line-words**: Number of words to keep at the beginning of a line without any refined diffs.
+
+## How this works:
+
+This works by adding a post-processing step after `diff-refine-hunk` (which itself uses `smerge-refine-regions`).  This protects all refined differences and a configurable amount of context around them, and computes regions to hide, marking them with a special `'invisibility` text property.  Note that the abridged text is still _there_, but indicated by an ellipsis (…), so toggling hiding simply reveals it.
