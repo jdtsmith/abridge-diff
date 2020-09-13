@@ -186,7 +186,10 @@ Skip the ranges listed in EXCLUDES"
 	(setq msg (concat msg " [WARNING: Hunk Refining Disabled!]"))))
     (message msg)))
 
+;; Pacify compiler
 (declare-function transient-append-suffix "transient.el" t t)
+(declare-function transient-remove-suffix "transient.el" t t)
+(defvar magit-diff-refine-hunk)
 ;;;###autoload
 (defun abridge-diff-enable ()
   "Enable abridge-diff, and the related advice."
