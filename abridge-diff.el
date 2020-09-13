@@ -173,8 +173,8 @@ Skip the ranges listed in EXCLUDES"
   (setq abridge-diff-hiding nil)
   (remove-from-invisibility-spec '(abridge-diff-invisible . t)))
 
-;;;###autoload
 (defvar magit-diff-refine-hunk)
+;;;###autoload
 (defun abridge-diff-toggle-hiding ()
   "Toggle abridged text hiding."
   (interactive)
