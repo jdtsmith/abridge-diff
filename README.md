@@ -21,7 +21,7 @@ Using `abridge-diff`, only the refined changes and a bit of surrounding context 
   :init (abridge-diff-mode 1))
 ```
 
-You can disable `abridge-diff` entirely with `M-x abridge-diff-disable`.  
+You can disable `abridge-diff` with `C-- M-x abridge-diff-mode`.
 
 ## Usage:
 
