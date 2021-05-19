@@ -40,9 +40,10 @@ This works best with `magit-diff-refine-hunk` set to `'all` (so that all hunks i
 You can customize settings with these variables; just `M-x customize-group abridge-diff`:
 
 - **abridge-diff-word-buffer**:  Number of words to preserve around refined regions.
-- **abridge-diff-first-words-preserve**:    Keep at least this many words visible at the beginning of an abridged line with refined diffs.
-- **abridge-diff-invisible-min**: Minimum region length (in characters) between refined areas that can be made invisible.
+- **abridge-diff-first-words-preserve**: Keep at least this many words visible at the beginning of an abridged line with refined diffs.
+- **abridge-diff-invisible-min**: Minimum region length (in characters) between refined areas that can be made invisible.  Smaller regions are left visible. 
 - **abridge-diff-no-change-line-words**: Number of words to keep at the beginning of a line without any refined diffs.
+- **abridge-diff-exclude-files-matching**: A list of regexps matching files to exclude from diff abridging in magit, e.g. '("\\.py$" "foo.*bar"). Diffs of other files are still abridged. 
 
 ## How this works:
 

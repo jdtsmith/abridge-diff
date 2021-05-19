@@ -69,6 +69,7 @@
 ;;; Code:
 
 (require 'seq)
+(require 'cl-extra)
 
 (defcustom abridge-diff-word-buffer 3
   "Number of words to preserve around refined regions."
@@ -89,6 +90,11 @@
   "Keep at least this many words visible at the beginning of an abridged line with refined diffs."
   :group 'abridge-diff
   :type 'integer)
+
+(defcustom abridge-diff-exclude-files-matching nil
+  "Exclude abridging diffs from files matching these patterns in magit."
+  :group 'abridge-diff
+  :type '(repeat regexp))
 
 (defun abridge-diff-merge-exclude (excludes)
   "Merge exclude regions EXCLUDES, a list of lists."
@@ -142,9 +148,7 @@ Skip the ranges listed in EXCLUDES"
 	
 	(if (memq (char-after beg) '(?+ ?-))
 	    (setq beg (1+ beg)))
-
 	
-
 	(if (not protect) ;nothing specific changed, just show first words
 	    (setq hide (list (list
 			      (save-excursion
@@ -165,12 +169,21 @@ Skip the ranges listed in EXCLUDES"
 ;;;###autoload
 (defun abridge-diff-abridge (&rest rest)
   "Do the diff abridge, taking as REST the region argument of `smerge-refine-regions'."
-  (dolist (x (seq-partition (seq-take rest 4) 2))
-    (save-excursion
-      (goto-char (car x))
-      (while (< (point) (cadr x))
-	(abridge-diff-make-invisible (point) (line-end-position))
-	(forward-line)))))
+  (let ((file (and (fboundp 'magit)
+		   (save-excursion
+		     (goto-char (car rest))
+		     (magit-file-at-point )))))
+    (unless (and file
+		 abridge-diff-exclude-files-matching
+		 (cl-some (lambda (x) (string-match-p x file))
+			  abridge-diff-exclude-files-matching))
+      (message "Actually Abridging %s" file)
+      (dolist (x (seq-partition (seq-take rest 4) 2))
+	(save-excursion
+	  (goto-char (car x))
+	  (while (< (point) (cadr x))
+	    (abridge-diff-make-invisible (point) (line-end-position))
+	    (forward-line)))))))
 
 ;;;###autoload
 
@@ -196,8 +209,9 @@ Skip the ranges listed in EXCLUDES"
   (interactive)
   (if abridge-diff-hiding
       (abridge-diff-disable-hiding)
-    (abridge-diff-enable-hiding))
-  (let ((msg (concat "Diff Abriding " (if abridge-diff-hiding "On" "Off"))))
+  (abridge-diff-enable-hiding))
+  (let ((msg (concat "Diff Abridging "
+		     (if abridge-diff-hiding "On" "Off"))))
     (when (fboundp 'magit)		;add magit command
       (unless magit-diff-refine-hunk
 	(setq msg (concat msg " [WARNING: Hunk Refining Disabled!]"))))
@@ -218,7 +232,7 @@ Skip the ranges listed in EXCLUDES"
 
 ;;;###autoload
 (defun abridge-diff-disable ()
-  "Enable abridge-diff, and the related advice."
+  "Disable abridge-diff, and the related advice."
   (advice-remove #'smerge-refine-regions #'abridge-diff-abridge)
   (when (fboundp 'magit)		;add magit command
     (require 'magit-diff)
