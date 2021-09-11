@@ -5,10 +5,12 @@ A simple Emacs package for _abridging_ refined diff hunks (for example in [magit
 
 #### Before
 For long, multi-sentence paragraphs on a single line, showing a few changes produces lots of useless context:
+
 ![](examples/before.png)
 
 #### After
 Using `abridge-diff`, only the refined changes and a bit of surrounding context are shown.  Much cleaner:
+
 ![](examples/after.png)
 
 ## Installation:
