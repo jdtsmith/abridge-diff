@@ -70,6 +70,7 @@
 
 (require 'seq)
 (require 'cl-extra)
+(require 'magit-git)
 
 (defcustom abridge-diff-word-buffer 3
   "Number of words to preserve around refined regions."
