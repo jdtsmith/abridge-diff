@@ -77,22 +77,26 @@
   :type 'integer)
 
 (defcustom abridge-diff-invisible-min 5
-  "Minimum region length (in characters) between refine areas that can be made invisible."
+  "Minimum region length (in characters) between refine areas that
+can be made invisible."
   :group 'abridge-diff
   :type 'integer)
 
 (defcustom abridge-diff-no-change-line-words 12
-  "Number of words to keep at the beginning of a line without any refined diffs."
+  "Number of words to keep at the beginning of a line without any
+refined diffs."
   :group 'abridge-diff
   :type 'integer)
 
 (defcustom abridge-diff-first-words-preserve 4
-  "Keep at least this many words visible at the beginning of an abridged line with refined diffs."
+  "Keep at least this many words visible at the beginning of an
+abridged line with refined diffs."
   :group 'abridge-diff
   :type 'integer)
 
 (defcustom abridge-diff-exclude-files-matching nil
-  "Exclude abridging diffs from files matching these patterns in magit."
+  "Exclude abridging diffs from files matching these patterns in
+magit."
   :group 'abridge-diff
   :type '(repeat regexp))
 
@@ -124,7 +128,8 @@ Skip the ranges listed in EXCLUDES"
 		(nreverse hide))))
 
 (defun abridge-diff-make-invisible (beg end)
-  "Set invisibility for context surrounding refined diffs in region from BEG to END."
+  "Set invisibility for context surrounding refined diffs in region
+from BEG to END."
   (if (> (- end beg) abridge-diff-invisible-min)
       (let ((protect
 	     (mapcar (lambda (ov)
@@ -168,7 +173,8 @@ Skip the ranges listed in EXCLUDES"
 			       '(invisible abridge-diff-invisible))))))
 ;;;###autoload
 (defun abridge-diff-abridge (&rest rest)
-  "Do the diff abridge, taking as REST the region argument of `smerge-refine-regions'."
+  "Do the diff abridging.
+Takes as REST the region argument of `smerge-refine-regions'."
   (let ((file (and (fboundp 'magit)
 		   (save-excursion
 		     (goto-char (car rest))
