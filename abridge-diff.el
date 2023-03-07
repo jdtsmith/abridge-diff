@@ -1,11 +1,11 @@
 ;;; abridge-diff.el --- Abridge long line-based diff hunks, including in magit -*- lexical-binding:t -*-
 
-;; Copyright (C) 2020 J.D. Smith <jdtsmith AT gmail>
+;; Copyright (C) 2020-2023 J.D. Smith <jdtsmith AT gmail>
 
 ;; Author: J.D. Smith <jdtsmith AT gmail>
 ;; Package-Requires: ((emacs "26.1"))
 ;; URL: https://github.com/jdtsmith/abridge-diff
-;; Version: 0.0.3
+;; Version: 0.0.4
 ;; Keywords: magit, diffs, tools
 ;; Prefix: abridge-diff
 ;; Separator: -
@@ -185,7 +185,6 @@ Takes as REST the region argument of `smerge-refine-regions'."
 		 abridge-diff-exclude-files-matching
 		 (cl-some (lambda (x) (string-match-p x file))
 			  abridge-diff-exclude-files-matching))
-      (message "Actually Abridging %s" file)
       (dolist (x (seq-partition (seq-take rest 4) 2))
 	(save-excursion
 	  (goto-char (car x))
